@@ -1,10 +1,8 @@
 package ru.trinitydigital.cameraimage.ui.main
 
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.lifecycle.Observer
 import com.google.android.material.shape.CornerFamily
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -45,7 +43,7 @@ class MainActivity : BaseUserPhotoActivity() {
         viewModel.userData.observe(this, {
             Picasso.get()
                 .load(it.avatar)
-                .into(image, object : Callback{
+                .into(image, object : Callback {
                     override fun onSuccess() {
                         Log.d("adssadasd", "adasdasd")
                     }
@@ -69,10 +67,12 @@ class MainActivity : BaseUserPhotoActivity() {
     }
 
     override fun showPhoto(file: File) {
-        val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-        image.setImageBitmap(bitmap)
+//        val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+//        image.setImageBitmap(bitmap)
+        viewModel.updateUserWithPhoto(file)
     }
 
     override fun showPhoto1(file: Uri?) {
+
     }
 }
