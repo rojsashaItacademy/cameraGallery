@@ -23,7 +23,7 @@ class UserInteractorImpl(private val service: RetrofitService) : UserInteractor 
     }
 
     override suspend fun loadUserProfile(): Response<ProfileModel?> {
-        TODO("Not yet implemented")
+        return service.loadUserProfile()
     }
 
 }

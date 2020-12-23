@@ -3,7 +3,11 @@ package ru.trinitydigital.cameraimage.ui.main
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import androidx.lifecycle.Observer
 import com.google.android.material.shape.CornerFamily
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.trinitydigital.cameraimage.R
@@ -11,6 +15,7 @@ import ru.trinitydigital.cameraimage.common.BaseUserPhotoActivity
 import ru.trinitydigital.cameraimage.common.pickPhotoFromGalleryWithPermissionCheck
 import ru.trinitydigital.cameraimage.common.shootPhotoWithPermissionCheck
 import java.io.File
+import java.lang.Exception
 
 class MainActivity : BaseUserPhotoActivity() {
 
@@ -31,6 +36,26 @@ class MainActivity : BaseUserPhotoActivity() {
             .setBottomRightCorner(CornerFamily.ROUNDED, radius)
             .build()
 
+        setupViewModel()
+
+
+    }
+
+    private fun setupViewModel() {
+        viewModel.userData.observe(this, {
+            Picasso.get()
+                .load(it.avatar)
+                .into(image, object : Callback{
+                    override fun onSuccess() {
+                        Log.d("adssadasd", "adasdasd")
+                    }
+
+                    override fun onError(e: Exception?) {
+                        Log.d("adssadasd", "adasdasd")
+                    }
+
+                })
+        })
     }
 
     private fun setupListeners() {

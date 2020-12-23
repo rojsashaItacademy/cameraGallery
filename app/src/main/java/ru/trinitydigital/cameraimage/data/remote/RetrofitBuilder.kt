@@ -22,6 +22,7 @@ object RetrofitBuilder {
     private fun initOkHttpClient(baseUrl: String): OkHttpClient {
         val okHttp = OkHttpClient.Builder()
             .authenticator(TokenAuthenticator(authApi(baseUrl)))
+            .addInterceptor(HeadersInterceptor())
             .writeTimeout(TIME_INTERVAL, TimeUnit.SECONDS)
             .readTimeout(TIME_INTERVAL, TimeUnit.SECONDS)
             .connectTimeout(TIME_INTERVAL, TimeUnit.SECONDS)
